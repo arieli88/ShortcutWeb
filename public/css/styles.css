@@ -1,0 +1,45 @@
+.grid-view {
+    display: table;
+    width: 100%;
+}
+
+.grid-view > div {
+    display: table-row;
+}
+
+.grid-view > div > * {
+    display: table-cell;
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .grid-view > div > * {
+        border-color: #4a5568;
+    }
+}
+
+/* Animation for search results */
+.search-result-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.search-result-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
+}
+
+/* Simple carousel: only active image is visible */
+.image-carousel img { display: none; }
+.image-carousel img.active { display: block; }
+.image-carousel img.object-cover { object-fit: cover; }
+
+/* Notes wrapping */
+.notes-text, .break-words { white-space: pre-wrap; word-break: break-word; }
+
+/* Sticky header and search bar adjustments */
+#mainHeader { position: sticky; top: 0; z-index: 50; }
+main { padding-top: 0.5rem; }
+.sticky-search-placeholder { height: 3rem; }
