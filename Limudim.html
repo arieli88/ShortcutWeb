@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מערכת לימודים - תשפ"ו</title>
+  <style>
+    /* רקע דינמי */
+    body {
+      margin: 0;
+      font-family: "Assistant", sans-serif;
+      background: linear-gradient(135deg, #00c6a7, #0072ff);
+      background-size: 300% 300%;
+      animation: gradientMove 12s ease infinite;
+      color: #fff;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* תפריט עליון */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      color: #fff;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .tab.active, .tab:hover {
+      background: rgba(255,255,255,0.35);
+      color: #003c2f;
+      font-weight: bold;
+    }
+
+    /* תוכן */
+    .content {
+      display: none;
+      padding: 20px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* כרטיס */
+    .card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 15px 20px;
+      margin: 15px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    .card h3 {
+      margin: 0 0 8px 0;
+      color: #fff;
+      font-size: 1.1em;
+    }
+
+    .card p {
+      margin: 3px 0;
+      color: #f0f0f0;
+      font-size: 0.95em;
+    }
+
+    a {
+      color: #00ffe1;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .break {
+      text-align: center;
+      margin: 10px 0;
+      font-style: italic;
+      color: #ffe;
+      opacity: 0.8;
+      animation: fadeCoffee 2s infinite alternate;
+    }
+
+    @keyframes fadeCoffee {
+      from { opacity: 0.6; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 700px) {
+      .card { font-size: 0.9em; }
+      .tab { padding: 8px 12px; font-size: 0.9em; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="tabs">
+    <div class="tab active" onclick="openTab('tue')">יום ג׳</div>
+    <div class="tab" onclick="openTab('wed')">יום ד׳</div>
+    <div class="tab" onclick="openTab('thu')">יום ה׳</div>
+    <div class="tab" onclick="openTab('online')">קורס מקוון</div>
+  </div>
+
+  <!-- יום ג׳ -->
+  <div id="tue" class="content active">
+    <h2>יום ג׳</h2>
+
+    <div class="card">
+      <h3>תכנון מבוסס משתמש</h3>
+      <p><b>מרצה:</b> <a href="mailto:Ofer.Bergman@biu.ac.il">פרופ' עופר ברגמן</a></p>
+      <p><b>שעה:</b> 10:00–11:30</p>
+      <p><b>מיקום:</b> בניין יהדות 404 חדר 101</p>
+    </div>
+
+    <div class="break">☕ הפסקה</div>
+
+    <div class="card">
+      <h3>מבוא למבנה המחשב ומערכות הפעלה</h3>
+      <p><b>מרצה:</b> <a href="mailto:rshweka@gmail.com">ד"ר אהרון (רוני) שויקה</a></p>
+      <p><b>טלפון:</b> 050-9231640</p>
+      <p><b>שעה:</b> 12:00–13:30</p>
+      <p><b>מיקום:</b> בניין יהדות 402 חדר 63</p>
+    </div>
+
+    <div class="break">☕ הפסקה</div>
+
+    <div class="card">
+      <h3>יסודות התכנות</h3>
+      <p><b>מרצה:</b> <a href="mailto:maayan.zhitomirsky-geffet@biu.ac.il">פרופ' מעיין גפת־טמיר</a></p>
+      <p><b>שעה:</b> 14:00–15:30</p>
+      <p><b>מיקום:</b> בניין יהדות 404 חדר 201</p>
+    </div>
+
+    <div class="break">☕ הפסקה</div>
+
+    <div class="card">
+      <h3>יסודות התכנות</h3>
+      <p><b>מרצה:</b> <a href="mailto:minstes@biu.ac.il">גב' שרה מינסטר</a></p>
+      <p><b>שעה:</b> 16:00–17:30</p>
+      <p><b>מיקום:</b> בניין יהדות 404 חדר 201</p>
+    </div>
+
+    <div class="break">☕ הפסקה</div>
+
+    <div class="card">
+      <h3>מבוא למדעי המידע (מקוון)</h3>
+      <p><b>מרצה:</b> <a href="mailto:Jenny.Bronstein@biu.ac.il">פרופ' ג׳ני ברונשטיין</a></p>
+      <p><b>פרטים:</b> קורס מקוון – חומרי הקורס מועלים אחת לשבועיים בימי שלישי.<br>יש מטלות בלמדא.</p>
+      <p><a href="https://lemida.biu.ac.il/course/view.php?id=106640" target="_blank">🎓 כניסה לקורס בלמדא</a></p>
+    </div>
+
+  </div>
+
+  <!-- יום ד׳ -->
+  <div id="wed" class="content">
+    <h2>יום ד׳</h2>
+
+    <div class="card">
+      <h3>מאגרי מידע במדעי החברה</h3>
+      <p><b>מרצה:</b> <a href="mailto:Noa.Aharony@biu.ac.il">פרופ' נועה אהרוני</a></p>
+      <p><b>שעה:</b> 08:00–09:30</p>
+      <p><b>מיקום:</b> בניין יהדות 403 חדר 211</p>
+    </div>
+
+    <div class="break">☕ הפסקה</div>
+
+    <div class="card">
+      <h3>פסיכולוגיה של האינטרנט</h3>
+      <p><b>מרצה:</b> <a href="mailto:tal.gazit@biu.ac.il">ד"ר טלי גזית</a></p>
+      <p><b>שעה:</b> 10:00–11:30</p>
+      <p><b>מיקום:</b> בניין יהדות 404 חדר 101</p>
+    </div>
+
+    <div class="break">☕ הפסקה</div>
+
+    <div class="card">
+      <h3>יסודות מתמטיים ל־AI</h3>
+      <p><b>מרצה:</b> <a href="mailto:ariel.rosenfeld@biu.ac.il">פרופ' אריאל רוזנפלד</a></p>
+      <p><b>שעה:</b> 12:00–13:30</p>
+      <p><b>מיקום:</b> בניין יהדות 404 חדר 101</p>
+    </div>
+
+    <div class="break">☕ הפסקה</div>
+
+    <div class="card">
+      <h3>מבוא למסדי נתונים</h3>
+      <p><b>מרצה:</b> <a href="mailto:rshweka@gmail.com">ד"ר אהרון (רוני) שויקה</a></p>
+      <p><b>טלפון:</b> 050-9231640</p>
+      <p><b>שעה:</b> 14:00–15:30</p>
+      <p><b>מיקום:</b> בניין יהדות 404 חדר 113</p>
+    </div>
+
+    <div class="break">☕ הפסקה</div>
+
+    <div class="card">
+      <h3>מבוא למסדי נתונים (תרגול)</h3>
+      <p><b>מרצה:</b> <a href="mailto:rshweka@gmail.com">ד"ר אהרון (רוני) שויקה</a></p>
+      <p><b>טלפון:</b> 050-9231640</p>
+      <p><b>שעה:</b> 16:00–17:30</p>
+      <p><b>מיקום:</b> בניין יהדות 404 חדר 113</p>
+    </div>
+  </div>
+
+  <!-- יום ה׳ -->
+  <div id="thu" class="content">
+    <h2>יום ה׳</h2>
+    <div class="card">
+      <h3>אנגלית למתקדמים א׳ (4 ש"ס)</h3>
+      <p><b>מרצה:</b> <a href="mailto:Revital.Nagar@biu.ac.il">ד"ר רויטל נגר</a></p>
+      <p><b>שעה:</b> 08:00–11:30</p>
+      <p><b>מיקום:</b> בניין מ.ישראל 507 חדר 206</p>
+    </div>
+  </div>
+
+  <!-- קורס מקוון -->
+  <div id="online" class="content">
+    <h2>קורס מקוון</h2>
+    <div class="card">
+      <h3>מבוא למדעי המידע</h3>
+      <p><b>מרצה:</b> <a href="mailto:Jenny.Bronstein@biu.ac.il">פרופ' ג׳ני ברונשטיין</a></p>
+      <p>קורס <b>מקוון</b> – חומרי הקורס מתעדכנים אחת לשבועיים בימי שלישי.<br>
+         יש <b>מטלות בלמדא</b>.</p>
+      <a href="https://lemida.biu.ac.il/course/view.php?id=106640" target="_blank">🎓 כניסה לקורס בלמדא</a>
+    </div>
+  </div>
+
+  <script>
+    function openTab(id) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+      document.querySelector(`.tab[onclick="openTab('${id}')"]`).classList.add('active');
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
