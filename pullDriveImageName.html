@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Google Drive Folder Image Viewer</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; padding: 20px; text-align: right; }
+  h1 { color: #4CAF50; }
+  input { width: 80%; padding: 10px; font-size: 16px; }
+  button { padding: 10px 20px; font-size: 16px; margin-right: 10px; cursor: pointer; }
+  .image-container { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; justify-content: flex-end; }
+  .image-box { border: 1px solid #ccc; padding: 10px; background: #fff; width: 200px; text-align: center; }
+  .image-box img { max-width: 100%; height: auto; }
+  .link { word-break: break-all; margin-top: 5px; font-size: 14px; color: #007BFF; }
+</style>
+</head>
+<body>
+
+<h1>צפייה בתמונות מתיקיית Google Drive</h1>
+<p>הזן כאן את הקישור לתיקייה ציבורית:</p>
+<input type="text" id="folderUrl" placeholder="Paste folder URL here">
+<button onclick="fetchFolder()">הצג תמונות</button>
+
+<div class="image-container" id="imageContainer"></div>
+
+<script>
+async function fetchFolder() {
+  const folderUrl = document.getElementById('folderUrl').value;
+  const container = document.getElementById('imageContainer');
+  container.innerHTML = '<p>טוען...</p>';
+
+  try {
+    // מטעינים את דף התיקייה
+    const response = await fetch(folderUrl);
+    const text = await response.text();
+
+    // מחפשים את JSON של הקבצים (טריק לא רשמי)
+    const regex = /"docs":\s*(\[[^\]]+\])/;
+    const match = text.match(regex);
+
+    if (!match) {
+      container.innerHTML = '<p>לא נמצאו תמונות בתיקייה או שהתיקייה אינה ציבורית.</p>';
+      return;
+    }
+
+    const files = JSON.parse(match[1]);
+    container.innerHTML = '';
+
+    files.forEach(file => {
+      if (file.mimeType && file.mimeType.startsWith('image/')) {
+        const directLink = `https://lh3.googleusercontent.com/d/${file.id}`;
+        const box = document.createElement('div');
+        box.className = 'image-box';
+        box.innerHTML = `
+          <img src="${directLink}" alt="${file.name}" onerror="this.src='https://via.placeholder.com/150?text=לא+נמצאה+תמונה'">
+          <div class="link">${directLink}</div>
+        `;
+        container.appendChild(box);
+      }
+    });
+
+  } catch (error) {
+    container.innerHTML = '<p>שגיאה בטעינת התיקייה. ודא שהתיקייה ציבורית ושקישורה תקין.</p>';
+    console.error(error);
+  }
+}
+</script>
+
+</body>
+</html>
